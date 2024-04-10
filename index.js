@@ -49,7 +49,7 @@ Global Heatmap
       1024px: /global/:color/:activity/{z}/{x}/{y}@2x.png
 
       colors: mobileblue, orange, hot, blue, bluered, purple, gray
-  activities: all, ride, winter, run, water
+  activities: all, ride, winter, run, water, ...
 
 
 Personal Heatmap
@@ -57,7 +57,49 @@ Personal Heatmap
       1024px: /personal/:color/:activity/{z}/{x}/{y}@2x.png
 
       colors: orange, hot, blue, bluered, purple, gray
-  activities: all, ride, winter, run, water
+  activities: all, ride, winter, run, water, ...
+
+
+Additional Activity Types
+    sport_AlpineSki
+    sport_BackcountrySki
+    sport_Badminton
+    sport_Canoeing
+    sport_EBikeRide
+    sport_EMountainBikeRide
+    sport_Golf
+    sport_GravelRide
+    sport_Handcycle
+    sport_Hike
+    sport_IceSkate
+    sport_InlineSkate
+    sport_Kayaking
+    sport_Kitesurf
+    sport_MountainBikeRide
+    sport_NordicSki
+    sport_Pickleball
+    sport_Ride
+    sport_RockClimbing
+    sport_RollerSki
+    sport_Rowing
+    sport_Run
+    sport_Sail
+    sport_Skateboard
+    sport_Snowboard
+    sport_Snowshoe
+    sport_Soccer
+    sport_StandUpPaddling
+    sport_Surfing
+    sport_Swim
+    sport_Tennis
+    sport_TrailRun
+    sport_Velomobile
+    sport_VirtualRide
+    sport_VirtualRow
+    sport_VirtualRun
+    sport_Walk
+    sport_Wheelchair
+    sport_Windsurf
 `);
 }
 
