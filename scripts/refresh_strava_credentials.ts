@@ -32,22 +32,26 @@ if (!loginFormResp.ok) {
 }
 
 const loginPageText = await loginFormResp.text();
-const match = loginPageText.match(
-  /name="authenticity_token" value="([^"]+)"/,
+// Extract CSRF token from meta tag instead of authenticity_token input
+const csrfMatch = loginPageText.match(
+  /<meta name="csrf" content="([^"]+)"/
 );
 
-if (!match) {
-  throw new Error(`Could not acquire login form authenticity token.\n returned text\n ${loginPageText}`);
+if (!csrfMatch) {
+  throw new Error(`Could not acquire CSRF token.\n returned text\n ${loginPageText}`);
 }
-const authToken = match[1];
+const csrfToken = csrfMatch[1];
+
+// Extract cookies from the login page response
 const loginCookies = getCookies(loginFormResp);
 
+// Create form data for the login POST request
 const d = new URLSearchParams();
 d.set("email", STRAVA_EMAIL);
 d.set("password", STRAVA_PASSWORD);
 d.set("utf8", "\u2713");
 d.set("plan", "");
-d.set("authenticity_token", authToken);
+d.set("authenticity_token", csrfToken); // Use the CSRF token here
 d.set("remember_me", "on");
 
 const sessionResp = await fetch(
