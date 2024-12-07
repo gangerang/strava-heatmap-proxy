@@ -37,7 +37,7 @@ const match = loginPageText.match(
 );
 
 if (!match) {
-  throw new Error("Could not acquire login form authenticity token.");
+  throw new Error("Could not acquire login form authenticity token.\n returned text\n ${loginPageText}");
 }
 const authToken = match[1];
 const loginCookies = getCookies(loginFormResp);
