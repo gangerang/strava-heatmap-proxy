@@ -86,3 +86,5 @@ When you're all set, use `wrangler publish` to bring the site live on
 
 Heads up, your credentials will expire after a few weeks, considering creating
 a periodic task to refresh them every 7 days or so.
+
+Bump
