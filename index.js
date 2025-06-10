@@ -118,7 +118,7 @@ async function handleTileProxyRequest(request) {
   const url = new URL(request.url);
 
   const match = url.pathname.match(
-    new RegExp("(personal|global)/(\\w+)/(\\w+)/(\\d+)/(\\d+)/(\\d+)(@small|@2x)?.png")
+    new RegExp("(personal|globalheat)/(\\w+)/(\\w+)/(\\d+)/(\\d+)/(\\d+)(@small|@2x)?.png")
   );
   if (match === null) {
     return new Response("invalid url, expected: /kind/color/activity/z/x/y.png", {
