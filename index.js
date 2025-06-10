@@ -23,7 +23,7 @@ async function handleRequest(event) {
 
     if (!response) {
       const r = new Router();
-      r.get("/(personal|global)/.*", (req) => handleTileProxyRequest(req));
+      r.get("/(personal|globalheat)/.*", (req) => handleTileProxyRequest(req));
       r.get("/", () => handleIndexRequest());
 
       response = await r.route(event.request);
