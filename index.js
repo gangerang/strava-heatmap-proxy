@@ -119,7 +119,7 @@ async function handleTileProxyRequest(request) {
   const url = new URL(request.url);
 
   const match = url.pathname.match(
-    new RegExp("(personal|globalheat)/(\\w+)/(\\w+)/(\\d+)/(\\d+)/(\\d+)(@small|@2x)?.png")
+    /(personal|globalheat)\/(\w+)\/(\w+)\/(\d+)\/(\d+)\/(\d+)(@small|@2x)?\.png/
   );
   if (match === null) {
     return new Response("invalid url, expected: /kind/color/activity/z/x/y.png", {
@@ -134,7 +134,7 @@ async function handleTileProxyRequest(request) {
     }
   }
 
-  const [_, kind, color, activity, z, x, y, res] = match;
+  const [_, kind, activity, color, z, x, y, res] = match;
   const data = {
     strava_id: Env.STRAVA_ID,
     activity,
