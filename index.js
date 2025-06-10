@@ -115,6 +115,7 @@ const GLOBAL_MAP_URL =
 
 // Proxy requests from /kind/color/activity/z/x/y(?@2x).png to baseUrl
 async function handleTileProxyRequest(request) {
+  const start = Date.now();
   const url = new URL(request.url);
 
   const match = url.pathname.match(
@@ -155,11 +156,25 @@ async function handleTileProxyRequest(request) {
     headers: new Headers({ Cookie: Env.STRAVA_COOKIES }),
   });
 
-  let response = await fetch(proxiedRequest);
-  response = new Response(
-    await response.arrayBuffer(),
-    response
-  );
+  console.log('→ proxy', proxyUrl);
+
+  let upstream;
+  try {
+    upstream = await fetch(proxiedRequest);
+  } catch (err) {
+    console.error('fetch threw', err);        // network/DNS errors
+    throw err;
+  }
+
+  console.log('upstream status', upstream.status);
+
+  // if Strava says “go away”, capture the first 200 bytes of the body
+  if (upstream.status >= 400) {
+    const snippet = await upstream.clone().text();
+    console.error('error body', snippet.slice(0, 200));
+  }
+
+  console.log('done in', Date.now() - start, 'ms');
 
   response.headers.append('Access-Control-Allow-Origin', origin);
 
