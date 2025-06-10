@@ -137,8 +137,8 @@ async function handleTileProxyRequest(request) {
   const [_, kind, color, activity, z, x, y, res] = match;
   const data = {
     strava_id: Env.STRAVA_ID,
-    color,
     activity,
+    color,
     x,
     y,
     z,
@@ -176,7 +176,9 @@ async function handleTileProxyRequest(request) {
 
   console.log('done in', Date.now() - start, 'ms');
 
-  response.headers.append('Access-Control-Allow-Origin', origin);
+  const response = new Response(await upstream.arrayBuffer(), upstream);
 
+  response.headers.append("Access-Control-Allow-Origin", origin);
+  
   return response;
 }
